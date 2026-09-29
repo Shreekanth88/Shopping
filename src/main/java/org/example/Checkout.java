@@ -27,7 +27,7 @@ public class Checkout {
     }
 
     private int calculateOrangePrice(long oranges) {
-        return (int) (oranges * 25);
+        return (int) ((oranges / 3 * 2 + oranges % 3) * 25);
     }
 
     private void validateItems(List<String> items) {

@@ -44,4 +44,43 @@ public final class CheckoutTest {
                 checkout.total(List.of("Apple", "Apple", "Apple"))
         );
     }
+
+    @Test
+    void threeOrangesCost50p() {
+        assertEquals(
+                50,
+                checkout.total(List.of(
+                        "Orange", "Orange", "Orange"
+                ))
+        );
+    }
+
+    @Test
+    void twoOrangesCost50p() {
+        assertEquals(
+                50,
+                checkout.total(List.of("Orange", "Orange"))
+        );
+    }
+
+    @Test
+    void fourOrangesCost75p() {
+        assertEquals(
+                75,
+                checkout.total(List.of(
+                        "Orange", "Orange", "Orange", "Orange"
+                ))
+        );
+    }
+
+    @Test
+    void mixedBasketAppliesBothOffers() {
+        assertEquals(
+                170,
+                checkout.total(List.of(
+                        "Apple", "Apple", "Apple",
+                        "Orange", "Orange", "Orange"
+                ))
+        );
+    }
 }
