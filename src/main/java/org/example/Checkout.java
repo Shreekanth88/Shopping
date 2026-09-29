@@ -8,16 +8,33 @@ import java.util.List;
 public class Checkout {
 
     public int total(List<String> items) {
-        return items.stream()
-                .mapToInt(this::calculatePrice)
-                .sum();
+        long apples = items.stream()
+                .filter("Apple"::equals)
+                .count();
+
+        long oranges = items.stream()
+                .filter("Orange"::equals)
+                .count();
+
+        validateItems(items);
+
+        return calculateApplePrice(apples)
+                + calculateOrangePrice(oranges);
     }
 
-    private int calculatePrice(String item) {
-        return switch (item) {
-            case "Apple" -> 60;
-            case "Orange" -> 25;
-            default -> throw new IllegalArgumentException("Unknown item: " + item);
-        };
+    private int calculateApplePrice(long apples) {
+        return (int) ((apples / 2 + apples % 2) * 60);
+    }
+
+    private int calculateOrangePrice(long oranges) {
+        return (int) (oranges * 25);
+    }
+
+    private void validateItems(List<String> items) {
+        items.forEach(item -> {
+            if (!item.equals("Apple") && !item.equals("Orange")) {
+                throw new IllegalArgumentException("Unknown item: " + item);
+            }
+        });
     }
 }

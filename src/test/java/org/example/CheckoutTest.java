@@ -25,18 +25,23 @@ public final class CheckoutTest {
     }
 
     @Test
-    void mixedBasketCostsCorrectAmount() {
-        assertEquals(
-                205,
-                checkout.total(List.of("Apple", "Apple", "Orange", "Apple"))
-        );
-    }
-
-    @Test
     void unknownItemIsRejected() {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> checkout.total(List.of("Banana"))
+        );
+    }
+
+    @Test
+    void twoApplesCost60pWithBuyOneGetOneFree() {
+        assertEquals(60, checkout.total(List.of("Apple", "Apple")));
+    }
+
+    @Test
+    void threeApplesCost120p() {
+        assertEquals(
+                120,
+                checkout.total(List.of("Apple", "Apple", "Apple"))
         );
     }
 }
