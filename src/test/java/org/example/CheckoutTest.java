@@ -3,6 +3,7 @@ package org.example;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class CheckoutTest {
 
@@ -28,6 +29,14 @@ public final class CheckoutTest {
         assertEquals(
                 205,
                 checkout.total(List.of("Apple", "Apple", "Orange", "Apple"))
+        );
+    }
+
+    @Test
+    void unknownItemIsRejected() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> checkout.total(List.of("Banana"))
         );
     }
 }
