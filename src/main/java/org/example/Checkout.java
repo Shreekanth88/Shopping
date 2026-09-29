@@ -1,11 +1,23 @@
 package org.example;
 
 import java.util.List;
-import java.util.Objects;
 
-/** Calculate price in pence. */
+/**
+ * Calculate price in pence.
+ */
 public class Checkout {
+
     public int total(List<String> items) {
-        return 0;
+        return items.stream()
+                .mapToInt(this::calculatePrice)
+                .sum();
+    }
+
+    private int calculatePrice(String item) {
+        return switch (item) {
+            case "Apple" -> 60;
+            case "Orange" -> 25;
+            default -> throw new IllegalArgumentException("Unknown item: " + item);
+        };
     }
 }
