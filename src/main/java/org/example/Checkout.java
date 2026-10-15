@@ -24,6 +24,11 @@ public class Checkout {
                 + calculateOrangePrice(oranges);
     }
 
+    /**
+     *
+     * @param apples
+     * @return
+     */
     private int calculateApplePrice(int apples) {
         return (apples / 2 + apples % 2) * 60;
     }
